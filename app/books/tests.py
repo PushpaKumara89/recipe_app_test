@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import datetime
 
 from django.urls import reverse
 from rest_framework.test import APITestCase
@@ -15,7 +15,10 @@ class BooksTest(APITestCase):
             "isbn_number": "4343434"
         }
 
-        response = self.client.post(reverse('book:book-list'), payload, format='json')
+        response = self.client.post(
+            reverse('book:book-list'),
+            payload, format='json'
+        )
         print(response.data['published_date'])
         print(response.data['id'])
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -25,6 +28,9 @@ class BooksTest(APITestCase):
         # Ensure the book attributes match the payload
         for key, value in payload.items():
             if key == 'published_date':
-                self.assertEqual(getattr(book, key), datetime.strptime(value, '%Y-%m-%d').date())
+                self.assertEqual(
+                    getattr(book, key),
+                    datetime.strptime(value, '%Y-%m-%d').date()
+                )
             else:
                 self.assertEqual(getattr(book, key), value)
