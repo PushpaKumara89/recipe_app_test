@@ -19,8 +19,6 @@ class BooksTest(APITestCase):
             reverse('book:book-list'),
             payload, format='json'
         )
-        print(response.data['published_date'])
-        print(response.data['id'])
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         book = Book.objects.get(id=response.data['id'])
