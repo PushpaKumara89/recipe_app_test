@@ -22,7 +22,7 @@ from drf_spectacular.views import (SpectacularAPIView,
                                    )
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/book/', include('books.urls')),
+    path('api/user/', include('user.urls')),
 
     # YOUR PATTERNS
     path('api/schema/',
